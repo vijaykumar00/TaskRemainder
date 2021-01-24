@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task remainder</title>
+    <style>
+        .container1{
+        
+           
+            width: 300px;
+            background-color: rgb(177, 194, 192);
+            border-radius: 40px;
+            height:20%;
+            margin-top: 59px;
+          
+        }
+        .input {
+            display: flex;
+            flex-direction: column;
+        padding-top: 22px;
+        padding-left: 70px;
+        
+        
+
+            
+        }
+       
+        
+        .input input{
+            width: 50%;
+            border-radius: 7px;
+            background-color: white;
+           
+
+
+           
+        }
+        .submit button{
+            border-radius: 3px;
+            background-color: blue;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            width: 100px;
+            height: 30px;
+            border: none;
+          
+        }
+        .submit {
+            margin-top: 10px;
+            padding-left: 70px;
+            padding-top: 20px;
+            border: none;
+          
+           
+        
+        }
+       .big{
+           display: flex;
+       }
+       .remainder{
+           padding-left: 20px;
+           justify-content: space-between;
+            width: 300px;
+            background-color: rgb(177, 194, 192);
+            border-radius: 20px;
+            
+            margin-left: 15px;
+       }
+     
+       .output{
+           width: 250px;
+    
+           border: black solid 2px;
+        padding-left:10px;
+        background-color: blue;
+        border-radius: 20px;
+        margin-top: 15px;
+       justify-content: center;
+       display: flex;
+    justify-content: space-between;
+    align-items: center;
+       color:black;
+       }
+       .output h1{
+           font-family: sans-serif;
+           font-size: 30px;
+font-weight: lighter;
+       }
+       .output p{
+font-size: 15px;
+       }
+     .right{
+padding-right: 5px;
+     }
+     .right audio{
+         
+
+     }
+       
+       
+    </style>
+    </head>
+<body>
+    <audio id="audio"controls style="display: none;">
+<source src="song.mp3" type="audio/mp3"  >
+    </audio>
+    <div class="big">
+    <div class="container1">
+        <div class="input">
+            <label>Title</label>
+            <input type="text" id="title" value="task">
+        </div>
+        <div class="input">
+            <label>Description</label>
+            <input type="text" id="desc" value="Discription">
+        </div>
+        <div class="input">
+            <label>Select Time</label>
+            <input type="datetime-local" id="time" >
+        </div>
+        <div class="submit" id="submit">
+            <button type="submit" id ="submitt" onclick="storeTask()">Add Task</button>
+        </div>
+    </div>
+    <div class="remainder" id ="rmd">
+        <h3>TASK REMINDER</h3>
+        
+
+</div>
+</div>
+<script>
+    function storeTask(){
+let task={ 
+     Description:document.getElementById("desc").value,
+ time:document.getElementById("time").value,
+ Title:document.getElementById("title").value,
+
+
+};
+let submit=document.getElementById("rmd");
+let audio=document.getElementById("audio");
+
+let data=localStorage.setItem('task',JSON.stringify(task));
+
+let submitData=submit.innerHTML+=`<div class="output">
+                     
+                    <div class="left">
+                          <h1> ${task.Title}</h1>
+                          <p>  ${task.Description}</p>
+                     </div>
+
+                    <div class="right"  id="time">
+                        ${task.time}
+                        
+                     </div>
+
+                </div> `;
+
+                let alramTime=new Date(task.time)-new Date().getTime();
+                console.log("time",alramTime)
+          setTimeout(()=>{
+              console.log("over")
+            document.querySelector("#audio").play();
+          },alramTime)    
+
+    }
+
+
+
+ 
+</script>
+
+    
+    
+</body>
+</html>
